@@ -40,6 +40,16 @@ class BankAccountTest {
   }
   
   @Test
+  public void withdraw_notBranch_beforeJUnit4() { // JUnit4 @Test(expected = IllegalArgumentException.class)
+    try {
+      account.withdraw(600.00, false);
+      fail("Should have thrown an IllegalArgumentException.");
+    } catch (IllegalArgumentException e) {
+    
+    }
+  }
+  
+  @Test
   public void getBalance_deposit() {
     account.deposit(200.00, true);
     assertEquals(1_200.00, account.getBalance(), 0);
