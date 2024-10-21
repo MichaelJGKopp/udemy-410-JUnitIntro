@@ -1,19 +1,24 @@
 package dev.lpa;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountTest {
   
   private BankAccount account;
+  private static int count;
+  
+  @BeforeAll
+  public static void beforeClass(){
+    System.out.println("@BeforeAll runs only once before any test method! Count = " + count++);
+  }
   
   @BeforeEach
   public void setup() {
     account =
       new BankAccount("Tim", "Buchalka", 1_000.00, BankAccount.CHECKING);
-    System.out.println("Running a test ...");
+    System.out.println("setup() with @BeforeEach runs before every method to start fresh.");
   }
   
   @org.junit.jupiter.api.Test
@@ -44,6 +49,15 @@ class BankAccountTest {
     assertTrue(account.isChecking(), "The account is not a checking account.");
   }
   
+  @AfterAll
+  public static void afterClass() {
+    System.out.println("@AfterAll is executed only once after class methods. Count = " + count++);
+  }
+  
+  @AfterEach
+  public void teardown() {
+    System.out.println("Count = " + count++);
+  }
 //  @Test
 //  public void dummyTest() {
 //    assertEquals(20, 21);
